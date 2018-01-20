@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note A Day</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!--register form-->
+    <div class="container" id="formContainer">
+        <form action="index.php?option=register" method="POST">
+            <input type="text" class="form-control" placeholder="Name" name="username">
+            <input type="password" class="form-control" placeholder="Password" name="password">
+            <input type="text" class="form-control" placeholder="Email address" name="email">
+            <button type="submit" id="submitButton" class="btn btn-primary" name="submit">Register</button>
+            <p class="message">Already registered? <a href="index.php?option=login">Sign In</a></p>
+        </form>
+    </div>
+
+
+    <!--login form-->
+    <div class="container" id="formContainer">
+        <form action="index.php" method="POST">
+            <input type="text" class="form-control" placeholder="Username" name="username">
+            <input type="password" class="form-control" placeholder="Password" name="password">
+            <button type="submit" class="btn btn-primary" name="submit">Login</button>
+            <p class="message">Not registered? <a href="index.php?option=register">Create an account</a></p>
+        </form>
+    </div>
+
+    <!--form Container-->
+<div class="container" id="formContainer">
+    <form novalidate action="notes.php" method="post" id="addNoteForm">
+        <input type="text" id="noteDateInput" class="form-control" name="date" placeholder="Enter Date" tabindex="1" required>
+        <input type="text" id="nameInput" class="form-control" name="name" placeholder="Enter Task Name" tabindex="2">
+        <textarea id="textAreaForm" class="form-control" name="details" tabindex="3" placeholder="Task details..."></textarea>
+        <button type="submit" class="btn btn-primary" tabindex="4">Save Task</button>
+    </form>
+</div>
+    <!--note Sample-->
+    <div class="container" id="notesArea">
+        <div class="note form-control">
+            <div class="buttonsContainer">
+                <span class="glyphicon glyphicon-edit" title="Edit Task"></span>
+                <a href="notes.php?deleteTask='.$row->getID().'" class="btn btn-outline-danger" title="Delete Task">del</a>
+            </div>
+            Name:<br> Details:
+            <br>
+            <a href="notes.php?notDone='.$row->getID().'" title="Not Done">mark as not done</a>
+            <span class="taskDateLabel">Date:</span>
+        </div>
+    </div>
+
+    <script src=""></script>
+</body>
+
+</html>
