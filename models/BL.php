@@ -49,15 +49,18 @@ class BL {
         foreach($usersArray as $user) {
             array_push($usersObjectsArray, new UserModel($user));
         }
-        return $usersObjectsArray;
+        return$usersObjectsArray;
     }
 
-    function getEmailUser($email) {
+    function getEmailUser($email, $username) {
         $adapter = new DAL();
-        $query = "SELECT * FROM `users` WHERE `email`= '$email'";
+        $query = "SELECT * FROM `users` WHERE `email`= '$email' OR `name`= '$username'";
         $usersArray = $adapter->fetch($query);
         $usersObjectsArray = array();
-        return $usersObjectsArray;
+        foreach($usersArray as $user) {
+            array_push($usersObjectsArray, $user);
+        }
+        return count($usersObjectsArray);
     }
 
     function insertUser($user) {

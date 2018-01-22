@@ -1,4 +1,5 @@
 <?php
+
 if (isset($_POST['submit'])) {
     include_once 'models/BL.php';
     include_once 'models/UserModel.php';
@@ -7,21 +8,28 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     if (empty($username) || empty($pwd) || empty($email)) {
         echo "error: empty";
-        //TODO: check if the user already registered
-    } else {
+    }
+    else {
+        //check if the user already registered
+        if (checkEmail($email, $username) > 0) {
+            echo "mail or username taken";
+        }
+        else {
         //insert to DB
         insertUser($_POST);
-        header("Location: index.php");
+        header("Refresh:0");
+        }
     }
 }
-//TODO: check if the user already registered
+
 //set data to sql
 function insertUser($user) {
     $businessLogic = new BL();
     $businessLogic->insertUser($user);
 }
 
-function checkEmail($email) {
+function checkEmail($email, $username) {
     $businessLogic = new BL();
-    $businessLogic->getEmailUser($email);
+    $result = $businessLogic->getEmailUser($email, $username);
+    return $result;
 }
